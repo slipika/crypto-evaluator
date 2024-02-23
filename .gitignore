@@ -1,0 +1,5 @@
+.vscode/*
+.DSstore
+.DS_Store
+crypto-evaluator
+coverage.out
