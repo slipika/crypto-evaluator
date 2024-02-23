@@ -38,6 +38,13 @@ type ExchangeRateData struct {
 	RateData Data `json:"data"`
 }
 
+/*
+*
+Exchange service communicates with coinbase api to get data for USD
+Env variable "COINBASE_SERVER_URL" can be set to different url incase we need exchange rates for different base currency .
+Currently it fetches exchange rates for USD.
+*
+*/
 func GetExchangeRateService() (*ExchangeRateService, error) {
 	coinbaseService := ExchangeRateService{}
 	serverUrl := os.Getenv("COINBASE_SERVER_URL")
@@ -64,6 +71,11 @@ func GetExchangeRateService() (*ExchangeRateService, error) {
 	return &coinbaseService, nil
 }
 
+/*
+*
+Looksup currency to get the rate from exchange rate map.
+*
+*/
 func (exchangeRateService *ExchangeRateService) GetCryptoRate(cryptoCurrency string) (float64, error) {
 	if exchangeRateService.ExchangeRateData.RateData.Currency == "" || exchangeRateService.ExchangeRateData.RateData.Rates == nil {
 		return 0, ErrIncorrectConfiguration
@@ -80,6 +92,11 @@ func (exchangeRateService *ExchangeRateService) GetCryptoRate(cryptoCurrency str
 	return rate, nil
 }
 
+/*
+*
+Mock server for mocking different http reponse and statuses
+*
+*/
 func GetMockServer(responseBytes []byte, withFailure bool) *httptest.Server {
 	if !withFailure {
 		return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
