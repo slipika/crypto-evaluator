@@ -22,13 +22,13 @@ make build
  ### Usage
 #### 1. Example Input
 ```
-./crypto-evaluator 200 ZXD ZRX
+./crypto-evaluator 200 BOB BSD
 ```
 
 #### 2. Example output
 ```
-140=>52833.4923
-60=>168.4177
+140=>968.8769
+60=>60.0000
 ```
 The first line represents the seventy split that is for a total of 200 dollars holding is 140 dollars is the seventy split  with 52833.4923 in ZXD crypto currency. The second line represents the 30% holdings in ZRX currency.
 
