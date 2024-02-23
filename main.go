@@ -40,6 +40,6 @@ func main() {
 	}
 	err := cmd.Execute()
 	if err != nil {
-		panic(err)
+		fmt.Println("exit with error")
 	}
 }
