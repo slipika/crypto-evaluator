@@ -9,9 +9,9 @@ import (
 )
 
 /*
-	Calculated the seventy thirty split for given two currencies
+Calculated the seventy thirty split for given two currencies
 
-Furture improvements/refactor could take an env variable to define the percentage split for currency1 and currency2
+Future improvements/refactor could take an env variable to define the percentage split for currency1 and currency2
 */
 func ProcessSeventyThirtySplit(inputAmount, seventyCurrency, thirtyCurrency string) ([]string, error) {
 	amount, err := strconv.ParseFloat(inputAmount, 64)

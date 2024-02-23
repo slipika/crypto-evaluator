@@ -101,7 +101,10 @@ func GetMockServer(responseBytes []byte, withFailure bool) *httptest.Server {
 	if !withFailure {
 		return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
-			w.Write(responseBytes)
+			_, err := w.Write(responseBytes)
+			if err != nil {
+				panic(err)
+			}
 		}))
 	} else {
 		return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

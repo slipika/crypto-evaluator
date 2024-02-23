@@ -43,7 +43,10 @@ func Test_GetExchangeRateServiceWithMockResponse(t *testing.T) {
 			name: "invalid-data-response",
 			server: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				w.WriteHeader(http.StatusOK)
-				w.Write([]byte(`{"data":{"currency":USD,"rates":{"00":"14.7601476014760148","1INCH":"2.2988505747126437"}}}`))
+				_, err := w.Write([]byte(`{"data":{"currency":USD,"rates":{"00":"14.7601476014760148","1INCH":"2.2988505747126437"}}}`))
+				if err != nil {
+					panic(err)
+				}
 			})),
 			expectedResponse: nil,
 			expectedErr:      ErrUnmarshallData,
@@ -52,7 +55,10 @@ func Test_GetExchangeRateServiceWithMockResponse(t *testing.T) {
 			name: "missing-response",
 			server: httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				w.WriteHeader(http.StatusOK)
-				w.Write([]byte(`{"data":{"dollars":"USD","rates":{"00":"14.7601476014760148","1INCH":"2.2988505747126437"}}}`))
+				_, err := w.Write([]byte(`{"data":{"dollars":"USD","rates":{"00":"14.7601476014760148","1INCH":"2.2988505747126437"}}}`))
+				if err != nil {
+					panic(err)
+				}
 			})),
 			expectedResponse: nil,
 			expectedErr:      ErrMissingExchangeRates,
